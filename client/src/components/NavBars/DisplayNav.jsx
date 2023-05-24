@@ -7,8 +7,8 @@ const DisplayNav = () => {
 
   return (
     <div>
-      <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
+      <nav className="navbar navbar-expand-lg bg-body-tertiary">
+        <div className="container-fluid">
          <h1> Drone Bucket</h1>
          <Link
               to="/display"

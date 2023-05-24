@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const DisplayPhotos = () => {
-  const { user_id } = useParams();
+  
 
   const [photos, setPhotos] = useState([]);
-  const [userPhotos, setUserPhotos] = useState([]);
-  const [currentUser, setCurrentUser] = useState(null);
+
+  
 
   
 
@@ -20,40 +20,14 @@ const DisplayPhotos = () => {
       .catch((err) => {
         console.log(err);
       });
-    axios
-      .get("http://localhost:8000/api/user/photos", {
-        withCredentials: true, // Ensure cookies are sent with the request
-      })
-      .then((res) => {
-        console.log(res);
-        setUserPhotos(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    }, []);
 
-    axios
-      .get("http://localhost:8000/api/currentUser", {
-        withCredentials: true, // Ensure cookies are sent with the request
-      })
-      .then((res) => {
-        console.log(res.data)
-        setCurrentUser(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
 
 
 
   return (
     <div className="wrapper ml-20">
-     {currentUser && (
-  <div>
-    <p>Current User: {currentUser.firstName}</p>
-  </div>
-)}
+  
 
       <div className="row d-flex justify-content-center mx-auto p-2 grid gap-3">
         {photos.map((photo) => (

@@ -1,22 +1,14 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const UploadPhoto = (props) => {
-  
-  // grabbing the user 
-  const [user, setUser] = useState(null);
-  const [userPhotos, setUserPhotos] = useState([]);
-
-
-
 
   const { droneDetails, setDroneDetails } = props;
   const [photo, setPhoto] = useState({
     title: '',
     description: '',
-    imageUploaded: null,
-    user_id: '',
+    imageUploaded: null
   });
   
   const navigate = useNavigate();
@@ -37,7 +29,6 @@ const UploadPhoto = (props) => {
     formData.append("title", photo.title);
     formData.append("description", photo.description);
     formData.append("imageUploaded", photo.imageUploaded);
-    formData.append("user_id", photo.user_id);
 
     axios
       .post("http://localhost:8000/api/newPhoto", formData)
@@ -48,7 +39,7 @@ const UploadPhoto = (props) => {
       })
       .catch((err) => {
         console.log("Error posting photo:", err);
-        // Handle the error appropriately
+        setErrors(err)
       });
   };
 
@@ -121,7 +112,6 @@ const UploadPhoto = (props) => {
               </div>
                 <br /> 
            
-            <input type="hidden" name="user_id" value={photo.user_id} />
             <input className="btn btn-primary" type="submit" />
           </div>
         </form>

@@ -12,10 +12,7 @@ const droneSchema = new mongoose.Schema({
     imageUploaded: {
       type: String, 
       required:true 
-    },
-    user_id:{
-      type: mongoose.Types.ObjectId
-  }
+    }
 }, { timestamps: true });
 module.exports = mongoose.model('Drone', droneSchema);
 

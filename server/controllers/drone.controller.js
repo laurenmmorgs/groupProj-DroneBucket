@@ -43,6 +43,8 @@ module.exports.findAllPhotos = (req, res) => {
                 res.status(400).json(err)
             })
     }
+
+    
     // Logged in User Only
 // Logged in User Only
 module.exports.allPhotosByLoggedInUser = async (req, res) => {
@@ -61,42 +63,33 @@ module.exports.allPhotosByLoggedInUser = async (req, res) => {
 
 
 //creates a photo 
-module.exports.createPhoto = async (request, response) => {
-  try {
-    const decodedJwt = jwt.decode(request.cookies.userToken, { complete: true });
-    console.log('DECODED JWT creating photo', decodedJwt);
-
-    const user_id = decodedJwt && decodedJwt.payload && decodedJwt.payload._id;
-
-    upload.single('imageUploaded')(request, response, async (err) => {
+module.exports.createPhoto = (request, response) => {
+  upload.single('imageUploaded')(request, response, (err) => {
       if (err) {
-        return response.status(400).json({ error: err.message });
+          return response.status(400).json({ error: err.message });
       }
-      console.log(request.file);
+      console.log(request.file)
 
+      // console.log(request.body)
       const newPhoto = new Photo({
         title: request.body.title,
         description: request.body.description,
-        imageUploaded: request.file ? request.file.path : null,
-        user_id: user_id || null // Assign user ID if available, otherwise set to null
-      });
+        imageUploaded: request.file ? request.file.path : null
+      });;
 
-      console.log("FINALIZED PHOTO", newPhoto);
-
-      try {
-        const photo = await newPhoto.save();
-        response.status(201).json({ photo });
-      } catch (error) {
-        response.status(400).json({ error });
-      }
-    });
-  } catch (error) {
-    response.status(400).json({ error });
-  }
+      newPhoto.save()
+          .then((item) => {
+              response.status(201).json({ item });
+          })
+          .catch((error) => {
+              response.status(400).json({ error });
+          });
+  });
 };
 
-  // initialize the user_id before creating the new Photo then check if decodedJwt exists, if so then it loads the payload. 
-  
+
+
+
 module.exports.getCurrentUser = async (req, res) => {
   try {
     const decodedJwt = jwt.decode(req.cookies.userToken, { complete: true });
