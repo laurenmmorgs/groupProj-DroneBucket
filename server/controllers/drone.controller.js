@@ -108,7 +108,7 @@ module.exports.getCurrentUser = async (req, res) => {
 //deletes photo
   module.exports.deletePhoto = (request, response) => {
     Photo.deleteOne({_id: request.params.id})
-        .then(deleteOneItem => response.json(deleteOneItem))
+        .then(deleteOnePhoto => response.json(deleteOnePhoto))
         .catch(err => response.json(err))
 
 }
@@ -117,7 +117,7 @@ module.exports.getCurrentUser = async (req, res) => {
 module.exports.findOnePhoto = (req, res) => {
   Photo.findOne({_id: req.params.id})
       .then((onePhoto) => {
-          res.json({ photo: onePhoto })  // whatever we name it gets called to the front end so Item for example 
+          res.json({ photo: onePhoto })  // whatever we name it gets called to the front end 
       })
       .catch((err) => {
           res.json({ message: 'Something went wrong', error: err })

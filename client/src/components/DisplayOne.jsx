@@ -21,7 +21,7 @@ const DisplayOne = () => {
       .catch((err) => console.log(err));
   });
 
-  //deletes from the database  buys the item
+  //deletes from the database 
   const deleteHandler = (id) => {
     console.log(id);
     axios

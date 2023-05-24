@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-//This will create a database named "thrift-items" if one doesn't already exist (no need for mongo shell!):
+//This will create a database named  if one doesn't already exist (no need for mongo shell!):
 
 
 
