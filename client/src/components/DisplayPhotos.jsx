@@ -3,8 +3,6 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
-import "./styles.css";
-
 const DisplayPhotos = () => {
   const [photos, setPhotos] = useState([]);
 
