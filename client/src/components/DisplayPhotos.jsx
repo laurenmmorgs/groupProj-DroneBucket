@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+
+import "./styles.css";
 
 const DisplayPhotos = () => {
-  
-
   const [photos, setPhotos] = useState([]);
-
-  
-
-  
 
   useEffect(() => {
     axios
@@ -20,15 +17,18 @@ const DisplayPhotos = () => {
       .catch((err) => {
         console.log(err);
       });
-    }, []);
-
-
-
+  }, []);
 
   return (
     <div className="wrapper ml-20">
-  
-
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 3 }}
+        transition={{ duration: 3 }}
+        className="text-center"
+      >
+        <h1> Photos From Our Users </h1>
+      </motion.div>
       <div className="row d-flex justify-content-center mx-auto p-2 grid gap-3">
         {photos.map((photo) => (
           <div
@@ -52,12 +52,19 @@ const DisplayPhotos = () => {
                   {photo.title}
                 </Link>
                 <p className="card-text">Title: {photo.title}</p>
-                <Link
-                  to={`/photo/${photo._id}`}
-                  className="icon-link icon-link-hover text-secondary"
+
+                <motion.div
+                  className="box"
+                  whileHover={{ scale: 1.1 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
                 >
-                  View photo
-                </Link>
+                  <Link
+                    to={`/photo/${photo._id}`}
+                    className="icon-link icon-link-hover text-secondary"
+                  >
+                    View photo
+                  </Link>
+                </motion.div>
               </div>
             </div>
           </div>

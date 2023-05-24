@@ -1,22 +1,32 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const DisplayNav = () => {
-
-
-
   return (
     <div>
-      <nav className="navbar navbar-expand-lg bg-body-tertiary">
+      <nav className="navbar bg-dark navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
         <div className="container-fluid">
-         <h1> Drone Bucket</h1>
-         <Link
-              to="/display"
-              className="btn btn-primary"
-              style={{ position: "absolute", right: 20 }}
-            >
+        <header>
+      <motion.h1
+        initial={{ rotate: 0 }}
+        animate={{ rotate: 360 }}
+        transition={{ duration: 1, repeat: 0 }}
+        style={{color:"white"}}
+      >
+        Drone Bucket
+      </motion.h1>
+    </header>
+          <motion.div
+            className="box "
+            whileHover={{ scale: 1.1 }}
+            transition={{ type: "spring", stiffness: 200, damping: 10 }}
+            style={{ position: "absolute", right: 40 }}
+          >
+            <Link to="/display" className="btn btn-primary">
               Back To Home Page
             </Link>
+          </motion.div>
         </div>
       </nav>
     </div>

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+
 
 const UploadPhoto = (props) => {
 
@@ -25,6 +27,8 @@ const UploadPhoto = (props) => {
       return;
     }
 
+
+
     const formData = new FormData();
     formData.append("title", photo.title);
     formData.append("description", photo.description);
@@ -39,7 +43,9 @@ const UploadPhoto = (props) => {
       })
       .catch((err) => {
         console.log("Error posting photo:", err);
+        setImageError("File Is Too Big")
         setErrors(err)
+        
       });
   };
 
@@ -64,12 +70,12 @@ const UploadPhoto = (props) => {
 
   return (
     <div className="row">
-      <div className="mx-auto col-10 col-md-8 col-lg-6 border mt-3">
+      <div className="mx-auto col-10 col-md-8 col-lg-6 border mt-3 rounded">
 
         <h1 className="text-center"> Post a new photo: </h1>
 
-        <form onSubmit={onSubmitHandler} encType="multipart/form-data" className="p-2">
-          <div>
+        <form onSubmit={onSubmitHandler} encType="multipart/form-data" className="p-2" >
+          <div >
           <div className="form-group">
               <label className="form-label"> Title: </label>
               <input
@@ -111,8 +117,14 @@ const UploadPhoto = (props) => {
 
               </div>
                 <br /> 
-           
+                <motion.div
+            className="box"
+            whileHover={{ scale: 1.1 }}
+            transition={{ type: "spring", stiffness: 100, damping: 10 }}
+            
+          >
             <input className="btn btn-primary" type="submit" />
+            </motion.div>
           </div>
         </form>
 

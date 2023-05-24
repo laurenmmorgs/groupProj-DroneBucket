@@ -68,6 +68,7 @@ module.exports.createPhoto = (request, response) => {
       if (err) {
           return response.status(400).json({ error: err.message });
       }
+      
       console.log(request.file)
 
       // console.log(request.body)
@@ -78,8 +79,8 @@ module.exports.createPhoto = (request, response) => {
       });;
 
       newPhoto.save()
-          .then((item) => {
-              response.status(201).json({ item });
+          .then((photo) => {
+              response.status(201).json({ photo });
           })
           .catch((error) => {
               response.status(400).json({ error });
